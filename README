@@ -1,0 +1,24 @@
+INTRO
+=====
+This jQuery plugin will make your form elements easily stylable through css.
+
+The following javascript should do the trick:
+jQuery("form#my-form").styleform();
+
+  Checkboxes
+  ----------
+  At the current moment only checkboxes are stylable.
+  After the styleform() function has been called, you'll have a <label> element to style, with the
+  following classes:
+  jqsf-element: Class to let you know it's a stylable element.
+  jqsf-checkbox: Class to let you know it's a stylable checkbox.
+  jqsf-over: On mouseover.
+  jqsf-down: On mousedown.
+  jqsf-checked: When the checkbox is checked.
+
+
+CHANGELOG
+=========
+Version_ 1.0.0 (2012-02-17)
+   + Added checkbox styling.
+   - Passes JSLint with: 'jslint browser: true, unparam: true, forin: true, plusplus: true, maxerr: 50, indent: 2'
