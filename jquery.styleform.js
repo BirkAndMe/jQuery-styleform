@@ -6,6 +6,15 @@
  *
  * This plugin enables styling of form elements.
  *
+ * Changelog:
+ *   | = Error fix.
+ *   + = Added functionality.
+ *   - = Note
+ *
+ * Version_ 1.0.1 (2012-02-17)
+ *   | The checkbox toggled when then styleform was called.
+ *   - Passes JSLint with: 'jslint browser: true, unparam: true, forin: true, plusplus: true, maxerr: 50, indent: 2'
+
  * Version_ 1.0.0 (2012-02-17)
  *   + Added checkbox styling.
  *   - Passes JSLint with: 'jslint browser: true, unparam: true, forin: true, plusplus: true, maxerr: 50, indent: 2'
@@ -87,18 +96,21 @@
             onUp = function () {
               $template.removeClass(actionStates.down);
               $(document).unbind('mouseup', onUp);
-            };
+            },
 
-          // Prepare the checkbox.
-          $element.hide()
-            .change(function () {
+            // This function is called when the checkbox is changed.
+            checkboxChange = function () {
               if ($element.attr('checked')) {
                 $template.addClass(states.checked);
               } else {
                 $template.removeClass(states.checked);
               }
-            })
-            .change();
+            };
+
+          // Prepare the checkbox.
+          $element.hide()
+            .change(checkboxChange);
+          checkboxChange();
 
           // If the checkbox don't have an id, we need to assign one, so the
           // label can refer to it.
@@ -147,11 +159,12 @@
   $.fn.styleform = function (method) {
     if (methods[method]) {
       return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
-    } else if (typeof method === 'object' || !method) {
-      return methods.form.apply(this, arguments);
-    } else {
-      $.error('Method ' +  method + ' does not exist on jQuery.styleform');
     }
+    if (typeof method === 'object' || !method) {
+      return methods.form.apply(this, arguments);
+    }
+
+    $.error('Method ' +  method + ' does not exist on jQuery.styleform');
   };
 
   // Set the prefix to jqsf
