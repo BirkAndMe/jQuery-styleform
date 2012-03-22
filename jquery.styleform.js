@@ -14,7 +14,7 @@
  * Version_ 1.0.1 (2012-02-17)
  *   | The checkbox toggled when then styleform was called.
  *   - Passes JSLint with: 'jslint browser: true, unparam: true, forin: true, plusplus: true, maxerr: 50, indent: 2'
-
+ *
  * Version_ 1.0.0 (2012-02-17)
  *   + Added checkbox styling.
  *   - Passes JSLint with: 'jslint browser: true, unparam: true, forin: true, plusplus: true, maxerr: 50, indent: 2'
