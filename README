@@ -19,6 +19,15 @@ jQuery("form#my-form").styleform();
 
 CHANGELOG
 =========
+Version_ 1.0.2 (2012-03-22)
+   + Added radiobutton styling.
+   + Added a test page (test.htm).
+   - Passes JSLint with: 'jslint browser: true, unparam: true, forin: true, plusplus: true, maxerr: 50, indent: 2'
+
+Version_ 1.0.1 (2012-02-17)
+   | The checkbox toggled when then styleform was called.
+   - Passes JSLint with: 'jslint browser: true, unparam: true, forin: true, plusplus: true, maxerr: 50, indent: 2'
+
 Version_ 1.0.0 (2012-02-17)
    + Added checkbox styling.
    - Passes JSLint with: 'jslint browser: true, unparam: true, forin: true, plusplus: true, maxerr: 50, indent: 2'

@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="jquery.styleform.js" type="text/javascript"></script>
+    <style type="text/css">
+      body {
+        font-family: 'Helvetica', 'Arial', sans-serif;
+      }
+      
+      fieldset {
+        clear: both;
+        margin-bottom: 20px;
+      }
+      
+      fieldset div.elements {
+        float: left;
+        margin-right: 20px;
+      }
+      fieldset pre.css {
+        float: left;
+        background-color: #eee;
+        padding: 5px;
+        border: 1px solid #aaa;
+      }
+      fieldset div.elements div.field {
+        clear: both;
+      }
+      
+      fieldset div.elements div.field-checkbox {
+        padding-bottom: 4px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid #eee;
+      }
+      fieldset div.elements div.field-radio {
+        padding-bottom: 4px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid #eee;
+      }
+      
+      label.jqsf-checkbox {
+        width: 20px;
+        height: 20px;
+        background-color: #000;
+        display: block;
+        float: left;
+      }
+      label.jqsf-checkbox.jqsf-over { background-color: #00f; }
+      label.jqsf-checkbox.jqsf-down { background-color: #0ff; }
+      label.jqsf-checkbox.jqsf-checked { background-color: #0f0; }
+      label.jqsf-checkbox.jqsf-checked.jqsf-over { background-color: #00a; }
+      label.jqsf-checkbox.jqsf-checked.jqsf-down { background-color: #0aa; }
+      label.jqsf-checkbox.jqsf-checked.jqsf-over.jqsf-disabled,
+      label.jqsf-checkbox.jqsf-checked.jqsf-down.jqsf-disabled,
+      label.jqsf-checkbox.jqsf-checked.jqsf-disabled { background-color: #0a0; }
+      label.jqsf-checkbox.jqsf-disabled.jqsf-over,
+      label.jqsf-checkbox.jqsf-disabled.jqsf-down,
+      label.jqsf-checkbox.jqsf-disabled { background-color: #aaa; }
+      
+      label.jqsf-radio {
+        width: 20px;
+        height: 20px;
+        background-color: #000;
+        display: block;
+        float: left;
+      }
+      label.jqsf-radio.jqsf-over { background-color: #00f; }
+      label.jqsf-radio.jqsf-down { background-color: #0ff; }
+      label.jqsf-radio.jqsf-checked { background-color: #0f0; }
+      label.jqsf-radio.jqsf-checked.jqsf-over { background-color: #00a; }
+      label.jqsf-radio.jqsf-checked.jqsf-down { background-color: #0aa; }
+      label.jqsf-radio.jqsf-checked.jqsf-over.jqsf-disabled,
+      label.jqsf-radio.jqsf-checked.jqsf-down.jqsf-disabled,
+      label.jqsf-radio.jqsf-checked.jqsf-disabled { background-color: #0a0; }
+      label.jqsf-radio.jqsf-disabled.jqsf-over,
+      label.jqsf-radio.jqsf-disabled.jqsf-down,
+      label.jqsf-radio.jqsf-disabled { background-color: #aaa; }
+    </style>
+  </head>
+  <body>
+  <h1>Test</h1>
+  <form id="test-form" action="">
+    <fieldset>
+      <h2>Checkbox test</h2>
+      <div class="elements">
+        <div class="field field-checkbox">
+          <input type="checkbox" name="one" id="chk-one" class="jqsf-show" />
+          <label for="chk-one">Checkbox one (jqsf-show)</label>
+        </div>
+        <div class="field field-checkbox">
+          <input type="checkbox" name="two" id="chk-two" />
+          <label for="chk-two">Checkbox two</label>
+        </div>
+        <div class="field field-checkbox">
+          <input type="checkbox" name="three" id="chk-three" />
+          <label for="chk-three">Checkbox three</label>
+        </div>
+        <div class="field field-checkbox">
+          <input type="checkbox" name="four" id="chk-four" disabled="disabled" />
+          <label for="chk-four">Checkbox four (disabled)</label>
+        </div>
+        <div class="field field-checkbox">
+          <input type="checkbox" name="five" id="chk-five" disabled="disabled" class="jqsf-show"/>
+          <label for="chk-five">Checkbox five (disabled, jqsf-show)</label>
+        </div>
+        <div class="field field-checkbox">
+          <input type="checkbox" name="six" id="chk-six" class="jqsf-skip" />
+          <label for="chk-six">Checkbox six (jqsf-skip)</label>
+        </div>
+        <div class="field field-checkbox">
+          <input type="checkbox" name="seven" id="chk-seven" checked="checked" disabled="disabled" />
+          <label for="chk-seven">Checkbox seven (disabled checked)</label>
+        </div>
+      </div>
+      <pre class="css">label.jqsf-checkbox {
+  width: 20px;
+  height: 20px;
+  background-color: #000;
+  display: block;
+  float: left;
+}
+label.jqsf-checkbox.jqsf-over { background-color: #00f; }
+label.jqsf-checkbox.jqsf-down { background-color: #0ff; }
+label.jqsf-checkbox.jqsf-checked { background-color: #0f0; }
+label.jqsf-checkbox.jqsf-checked.jqsf-over { background-color: #00a; }
+label.jqsf-checkbox.jqsf-checked.jqsf-down { background-color: #0aa; }
+label.jqsf-checkbox.jqsf-checked.jqsf-over.jqsf-disabled,
+label.jqsf-checkbox.jqsf-checked.jqsf-down.jqsf-disabled,
+label.jqsf-checkbox.jqsf-checked.jqsf-disabled { background-color: #0a0; }
+label.jqsf-checkbox.jqsf-disabled.jqsf-over,
+label.jqsf-checkbox.jqsf-disabled.jqsf-down,
+label.jqsf-checkbox.jqsf-disabled { background-color: #aaa; }</pre>
+    </fieldset>
+    
+    
+    <fieldset>
+      <h2>Radiobutton test</h2>
+      <div class="elements">
+        <div class="field field-radio">
+          <input type="radio" name="grp" id="rdb-one" class="jqsf-show" />
+          <label for="rdb-one">Radiobutton one (jqsf-show)</label>
+        </div>
+        <div class="field field-radio">
+          <input type="radio" name="grp" id="rdb-two" />
+          <label for="rdb-two">Radiobutton two</label>
+        </div>
+        <div class="field field-radio">
+          <input type="radio" name="grp" id="rdb-three" />
+          <label for="rdb-three">Radiobutton three</label>
+        </div>
+        <div class="field field-radio">
+          <input type="radio" name="grp" id="rdb-four" disabled="disabled" />
+          <label for="rdb-four">Radiobutton four (disabled)</label>
+        </div>
+        <div class="field field-radio">
+          <input type="radio" name="grp" id="rdb-five" disabled="disabled" class="jqsf-show"/>
+          <label for="rdb-five">Radiobutton five (disabled, jqsf-show)</label>
+        </div>
+        <div class="field field-radio">
+          <input type="radio" name="grp" id="rdb-six" class="jqsf-skip" />
+          <label for="rdb-six">Radiobutton six (jqsf-skip)</label>
+        </div>
+        <div class="field field-radio">
+          <input type="radio" name="grp" id="rdb-seven" disabled="disabled" checked="checked" />
+          <label for="rdb-seven">Radiobutton seven (disabled checked)</label>
+        </div>
+      </div>
+      <pre class="css">label.jqsf-radio {
+  width: 20px;
+  height: 20px;
+  background-color: #000;
+  display: block;
+  float: left;
+}
+label.jqsf-radio.jqsf-over { background-color: #00f; }
+label.jqsf-radio.jqsf-down { background-color: #0ff; }
+label.jqsf-radio.jqsf-checked { background-color: #0f0; }
+label.jqsf-radio.jqsf-checked.jqsf-over { background-color: #00a; }
+label.jqsf-radio.jqsf-checked.jqsf-down { background-color: #0aa; }
+label.jqsf-radio.jqsf-checked.jqsf-over.jqsf-disabled,
+label.jqsf-radio.jqsf-checked.jqsf-down.jqsf-disabled,
+label.jqsf-radio.jqsf-checked.jqsf-disabled { background-color: #0a0; }
+label.jqsf-radio.jqsf-disabled.jqsf-over,
+label.jqsf-radio.jqsf-disabled.jqsf-down,
+label.jqsf-radio.jqsf-disabled { background-color: #aaa; }</pre>
+    </fieldset>
+  </form>
+  
+  <script type="text/javascript">
+    console.log(jQuery('form#test-form').styleform());
+  </script>
+  </body>
+</html>
