@@ -1,7 +1,7 @@
 /**
  * jQuery styleform
  *
- * By______ Philip Birk-Jensen <philip@b14.dk>
+ * By______ Philip Birk-Jensen <philip (at) b14 (dot) dk>
  * Sponsor_ b14 <http://www.b14.dk>
  *
  * This plugin enables styling of form elements.
@@ -144,7 +144,7 @@
 
       // Setup the events for both the template and any previously declared
       // label for the checker.
-      jQuery('label[for="' + $element.attr('id') + '"]')
+      $('label[for="' + $element.attr('id') + '"]')
         .mouseover(function () { $template.addClass(actionStates.over); })
         .mouseout(function () { $template.removeClass(actionStates.over); })
         .mouseup(onUp)
@@ -181,7 +181,7 @@
        */
       checkbox : function () {
         return this.each(function (index, element) {
-          var $element = jQuery(element);
+          var $element = $(element);
 
           // Skip te checkbox if the user told us to.
           if ($element.hasClass(settingsClasses.skip)) {
@@ -203,7 +203,7 @@
        */
       radio : function () {
         return this.each(function (index, element) {
-          var $element = jQuery(element);
+          var $element = $(element);
 
           // Skip the radio if the user told us to.
           if ($element.hasClass(settingsClasses.skip)) {
@@ -216,7 +216,7 @@
 
             // First get all the other radio buttons which are in the same group
             if ($element.attr('name')) {
-              $radioGroup = jQuery('input[name="' + $element.attr('name') + '"]:radio');
+              $radioGroup = $('input[name="' + $element.attr('name') + '"]:radio');
             } else {
               // If there's no group, just change the one.
               $radioGroup = $element;
@@ -224,7 +224,7 @@
 
             // Run through all the radio buttons and set their template.
             $radioGroup.each(function (index, radio) {
-              var $radio = jQuery(radio),
+              var $radio = $(radio),
 
                 // Get the style element
                 $styleElement = $radio.parent()
