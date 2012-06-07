@@ -1,7 +1,8 @@
+/*jslint browser: true, unparam: true, forin: true, plusplus: true, maxerr: 50, indent: 2*/
 /**
  * jQuery styleform
  *
- * By______ Philip Birk-Jensen <philip (at) b14 (dot) dk>
+ * By______ Philip Birk-Jensen <philip (at) birk-jensen (dot) dk>
  * Sponsor_ b14 <http://www.b14.dk>
  *
  * This plugin enables styling of form elements.
@@ -11,6 +12,10 @@
  *   + = Added functionality.
  *   - = Note
  *
+ * Version_ 1.0.3 (2012-06-07)
+ *   | Now working in MSIE 8
+ *   - Passes JSLint with: 'jslint browser: true, unparam: true, forin: true, plusplus: true, maxerr: 50, indent: 2'
+
  * Version_ 1.0.2 (2012-03-22)
  *   + Added radiobutton styling.
  *   - Passes JSLint with: 'jslint browser: true, unparam: true, forin: true, plusplus: true, maxerr: 50, indent: 2'
@@ -101,7 +106,7 @@
       var $template = templates[type].clone(),
 
         // We define the onUp function so we can unbind it again.
-        onUp = function () {
+        onUp = function (e) {
           $template.removeClass(actionStates.down);
           $(document).unbind('mouseup', onUp);
         },
@@ -151,6 +156,21 @@
         .mousedown(function () {
           $template.addClass(actionStates.down);
           $(document).mouseup(onUp);
+        })
+        .click(function (e) {
+          // IE 8 doesn't set the input field automatically when clicking
+          // the label, if the input field is hidden.
+          // So we need to manually set and unset the input field.
+          e.preventDefault();
+
+          if ($element.is(':checked') && $element.attr('type') === 'checkbox') {
+            $element.removeAttr('checked');
+          } else {
+            $element.attr('checked', 'checked');
+          }
+
+          // Call the change event.
+          $element.change();
         });
 
       // Listen to the change event, and invoke it once at the start.
