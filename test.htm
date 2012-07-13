@@ -40,43 +40,43 @@
         border-bottom: 1px solid #eee;
       }
       
-      label.jqsf-checkbox {
+      .jqsf-checkbox {
         width: 20px;
         height: 20px;
         background-color: #000;
         display: block;
         float: left;
       }
-      label.jqsf-checkbox.jqsf-over { background-color: #00f; }
-      label.jqsf-checkbox.jqsf-down { background-color: #0ff; }
-      label.jqsf-checkbox.jqsf-checked { background-color: #0f0; }
-      label.jqsf-checkbox.jqsf-checked.jqsf-over { background-color: #00a; }
-      label.jqsf-checkbox.jqsf-checked.jqsf-down { background-color: #0aa; }
-      label.jqsf-checkbox.jqsf-checked.jqsf-over.jqsf-disabled,
-      label.jqsf-checkbox.jqsf-checked.jqsf-down.jqsf-disabled,
-      label.jqsf-checkbox.jqsf-checked.jqsf-disabled { background-color: #0a0; }
-      label.jqsf-checkbox.jqsf-disabled.jqsf-over,
-      label.jqsf-checkbox.jqsf-disabled.jqsf-down,
-      label.jqsf-checkbox.jqsf-disabled { background-color: #aaa; }
+      .jqsf-checkbox.jqsf-over { background-color: #00f; }
+      .jqsf-checkbox.jqsf-down { background-color: #0ff; }
+      .jqsf-checkbox.jqsf-checked { background-color: #0f0; }
+      .jqsf-checkbox.jqsf-checked.jqsf-over { background-color: #00a; }
+      .jqsf-checkbox.jqsf-checked.jqsf-down { background-color: #0aa; }
+      .jqsf-checkbox.jqsf-checked.jqsf-over.jqsf-disabled,
+      .jqsf-checkbox.jqsf-checked.jqsf-down.jqsf-disabled,
+      .jqsf-checkbox.jqsf-checked.jqsf-disabled { background-color: #0a0; }
+      .jqsf-checkbox.jqsf-disabled.jqsf-over,
+      .jqsf-checkbox.jqsf-disabled.jqsf-down,
+      .jqsf-checkbox.jqsf-disabled { background-color: #aaa; }
       
-      label.jqsf-radio {
+      .jqsf-radio {
         width: 20px;
         height: 20px;
         background-color: #000;
         display: block;
         float: left;
       }
-      label.jqsf-radio.jqsf-over { background-color: #00f; }
-      label.jqsf-radio.jqsf-down { background-color: #0ff; }
-      label.jqsf-radio.jqsf-checked { background-color: #0f0; }
-      label.jqsf-radio.jqsf-checked.jqsf-over { background-color: #00a; }
-      label.jqsf-radio.jqsf-checked.jqsf-down { background-color: #0aa; }
-      label.jqsf-radio.jqsf-checked.jqsf-over.jqsf-disabled,
-      label.jqsf-radio.jqsf-checked.jqsf-down.jqsf-disabled,
-      label.jqsf-radio.jqsf-checked.jqsf-disabled { background-color: #0a0; }
-      label.jqsf-radio.jqsf-disabled.jqsf-over,
-      label.jqsf-radio.jqsf-disabled.jqsf-down,
-      label.jqsf-radio.jqsf-disabled { background-color: #aaa; }
+      .jqsf-radio.jqsf-over { background-color: #00f; }
+      .jqsf-radio.jqsf-down { background-color: #0ff; }
+      .jqsf-radio.jqsf-checked { background-color: #0f0; }
+      .jqsf-radio.jqsf-checked.jqsf-over { background-color: #00a; }
+      .jqsf-radio.jqsf-checked.jqsf-down { background-color: #0aa; }
+      .jqsf-radio.jqsf-checked.jqsf-over.jqsf-disabled,
+      .jqsf-radio.jqsf-checked.jqsf-down.jqsf-disabled,
+      .jqsf-radio.jqsf-checked.jqsf-disabled { background-color: #0a0; }
+      .jqsf-radio.jqsf-disabled.jqsf-over,
+      .jqsf-radio.jqsf-disabled.jqsf-down,
+      .jqsf-radio.jqsf-disabled { background-color: #aaa; }
     </style>
   </head>
   <body>
@@ -185,6 +185,31 @@ label.jqsf-radio.jqsf-checked.jqsf-disabled { background-color: #0a0; }
 label.jqsf-radio.jqsf-disabled.jqsf-over,
 label.jqsf-radio.jqsf-disabled.jqsf-down,
 label.jqsf-radio.jqsf-disabled { background-color: #aaa; }</pre>
+    </fieldset>
+    
+    <fieldset>
+      <h2>Select test</h2>
+      <div class="elements">
+        <div class="field field-select">
+          <label for="sel-one">Select one</label><br />
+          <select id="sel-one" name="one">
+            <option value="normal">Normal</option>
+            <option value="disabled" disabled="disabled">disabled</option>
+            <option value="label" label="short label">label</option>
+            <option value="selected" selected="selected">selected</option>
+            <option value="normal2">Normal 2</option>
+            <optgroup label="optgroup">
+              <option value="ingroup1">in group 1</option>
+              <option value="ingroup2">in group 2</option>
+              <option value="ingroup3">in group 3</option>
+            </optgroup>
+            <option value="normal3">Normal somsdgadsomgasdogm</option>
+            <option value="normal4">Normal 3</option>
+            <option value="normal5">Normal 4</option>
+          </select>
+        </div>
+      </div>
+      <pre class="css"></pre>
     </fieldset>
   </form>
   

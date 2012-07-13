@@ -12,31 +12,36 @@
  *   + = Added functionality.
  *   - = Note
  *
+ * Version_ 1.0.4 (2012-07-13)
+ *   + You can tab through the styled themes now.
+ *   + The styled fields keypress behaves like real form elements ("space" =
+ *     select and "enter" = nothing).
+ *   | Disabled checkbox and radiobutton are not actually disabled.
+ *   - I'm preparing the styling of select elements, so there's some left overs
+ *     in the code that doesn't do anything yet.
+ *   - There's an error when mixing non styled and styled radiobuttons in the
+ *     same group.
+ *
  * Version_ 1.0.3 (2012-06-07)
  *   | Now working in MSIE 8
- *   - Passes JSLint with: 'jslint browser: true, unparam: true, forin: true, plusplus: true, maxerr: 50, indent: 2'
-
+ *
  * Version_ 1.0.2 (2012-03-22)
  *   + Added radiobutton styling.
- *   - Passes JSLint with: 'jslint browser: true, unparam: true, forin: true, plusplus: true, maxerr: 50, indent: 2'
-
+ *
  * Version_ 1.0.1 (2012-02-17)
  *   | The checkbox toggled when then styleform was called.
- *   - Passes JSLint with: 'jslint browser: true, unparam: true, forin: true, plusplus: true, maxerr: 50, indent: 2'
  *
  * Version_ 1.0.0 (2012-02-17)
  *   + Added checkbox styling.
- *   - Passes JSLint with: 'jslint browser: true, unparam: true, forin: true, plusplus: true, maxerr: 50, indent: 2'
  */
 (function ($) {
   'use strict';
 
-  // This contains the templates for all the styling elements.
   var
     // List of all the templates used.
     templates = {
-      'checkbox' : $('<label />'),
-      'radio' : $('<label />')
+      'checkbox' : $('<a />'),
+      'radio' : $('<a />')
     },
 
     // All the interactive states. Like mouseover and mousedown
@@ -112,7 +117,18 @@
         },
 
         // This function is called when the checker is changed.
-        checkerChange = function () {
+        checkerChange = function (e) {
+          // IE 8 doesn't set the input field automatically when clicking
+          // the label, if the input field is hidden.
+          // So we need to manually set and unset the input field.
+          if ( e !== true && !e.originalEvent ) {
+            if ($element.is(':checked') && $element.attr('type') === 'checkbox') {
+              $element.removeAttr('checked');
+            } else {
+              $element.attr('checked', 'checked');
+            }
+          }
+        
           typeChanger($template, $element);
         },
 
@@ -144,12 +160,23 @@
       }
 
       // Add the template to the DOM.
-      $template.attr('for', $element.attr('id'))
+      $template
+        .attr('href', $element.attr('id'))
+        .attr('for', $element.attr('id'))
+        .keydown(function (e) {
+          switch (e.keyCode) {
+            case 32: // space
+              $element.change();
+            case 13: // enter
+              e.preventDefault();
+            break;
+          }
+        })
         .insertBefore($element);
 
       // Setup the events for both the template and any previously declared
       // label for the checker.
-      $('label[for="' + $element.attr('id') + '"]')
+      $('a[href="' + $element.attr('id') + '"], label[for="' + $element.attr('id') + '"]')
         .mouseover(function () { $template.addClass(actionStates.over); })
         .mouseout(function () { $template.removeClass(actionStates.over); })
         .mouseup(onUp)
@@ -158,15 +185,11 @@
           $(document).mouseup(onUp);
         })
         .click(function (e) {
-          // IE 8 doesn't set the input field automatically when clicking
-          // the label, if the input field is hidden.
-          // So we need to manually set and unset the input field.
           e.preventDefault();
 
-          if ($element.is(':checked') && $element.attr('type') === 'checkbox') {
-            $element.removeAttr('checked');
-          } else {
-            $element.attr('checked', 'checked');
+          // Don't do anything if the element is disabled.
+          if ($element.is(':disabled')) {
+            return;
           }
 
           // Call the change event.
@@ -175,7 +198,7 @@
 
       // Listen to the change event, and invoke it once at the start.
       $element.change(checkerChange);
-      checkerChange();
+      checkerChange(true);
     },
 
     // Setting the proper namespace as encouraged.
@@ -193,11 +216,13 @@
           $element.find('input[type="checkbox"]').styleform('checkbox');
 
           $element.find('input[type="radio"]').styleform('radio');
+          
+          $element.find('select').styleform('select');
         });
       },
 
       /**
-       * Enable styling of a checkbox
+       * Enable styling of a checkbox.
        */
       checkbox : function () {
         return this.each(function (index, element) {
@@ -219,7 +244,7 @@
       },
 
       /**
-       * Enable styling of a radio
+       * Enable styling of a radio.
        */
       radio : function () {
         return this.each(function (index, element) {
@@ -233,7 +258,7 @@
           // unlike the checkbox the change function is abit more tricky
           styleCheckers('radio', $element, function ($template, $element) {
             var $radioGroup;
-
+            
             // First get all the other radio buttons which are in the same group
             if ($element.attr('name')) {
               $radioGroup = $('input[name="' + $element.attr('name') + '"]:radio');
@@ -248,7 +273,7 @@
 
                 // Get the style element
                 $styleElement = $radio.parent()
-                  .children('label.' + elementClass + '[for="' + $radio.attr('id') + '"]');
+                  .children('a.' + elementClass + '[href="' + $radio.attr('id') + '"]');
 
               if ($radio.attr('checked')) {
                 $styleElement.addClass(states.checked);
@@ -257,6 +282,26 @@
               }
             });
           });
+        });
+      },
+      
+      /**
+       * enable styling of a select element.
+       */
+      select : function () {
+        return this.each(function (index, element) {
+          var $element = $(element);
+          
+          // Skip the select if the user told us to.
+          if ($element.hasClass(settingsClasses.skip)) {
+            return;
+          }
+          
+          
+          // var $template = $('<div class="select-container"><div class="toggler">Title</div><div class="box">stuff in here</div></div>');
+          
+          
+          // $template.insertBefore($element);
         });
       },
 
