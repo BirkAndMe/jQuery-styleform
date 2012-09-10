@@ -1,4 +1,4 @@
-/*jslint browser: true, unparam: true, forin: true, plusplus: true, maxerr: 50, indent: 2*/
+/*jshint forin:false, jquery:true, browser:true, indent:2, trailing:true, unused:false */
 /**
  * jQuery styleform
  *
@@ -12,6 +12,9 @@
  *   + = Added functionality.
  *   - = Note
  *
+ * Version_ 1.0.5 (2012-10-09)
+ *   - No longer jslint validated, but jshint instead.
+
  * Version_ 1.0.4 (2012-07-13)
  *   + You can tab through the styled themes now.
  *   + The styled fields keypress behaves like real form elements ("space" =
@@ -111,7 +114,7 @@
       var $template = templates[type].clone(),
 
         // We define the onUp function so we can unbind it again.
-        onUp = function (e) {
+        onUp = function () {
           $template.removeClass(actionStates.down);
           $(document).unbind('mouseup', onUp);
         },
@@ -121,23 +124,23 @@
           // IE 8 doesn't set the input field automatically when clicking
           // the label, if the input field is hidden.
           // So we need to manually set and unset the input field.
-          if ( e !== true && !e.originalEvent ) {
+          if (e !== true && !e.originalEvent) {
             if ($element.is(':checked') && $element.attr('type') === 'checkbox') {
               $element.removeAttr('checked');
             } else {
               $element.attr('checked', 'checked');
             }
           }
-        
+
           typeChanger($template, $element);
-        },
+        };
 
         // Catering for JSLint, though I disagree on this one, and think it
         // needs to get fixed, it's hopefully not working as intended.
         // It tells us "Move 'var' declarations to the top of the function"
         // when it's declared in a "for (var key in object)".
         // (http://stackoverflow.com/questions/4646455/jslint-error-move-all-var-declarations-to-the-top-of-the-function)
-        key;
+        // key;
 
       // Hide the checker, unless the settingsClass show is present.
       if (!$element.hasClass(settingsClasses.show)) {
@@ -145,7 +148,7 @@
       }
 
       // Check for flags and set their appropriate classes
-      for (key in flags) {
+      for (var key in flags) {
         if ($element.attr(key) === key) {
           $template.addClass(flags[key]);
         }
@@ -162,13 +165,13 @@
       // Add the template to the DOM.
       $template
         .attr('href', $element.attr('id'))
-        .attr('for', $element.attr('id'))
         .keydown(function (e) {
           switch (e.keyCode) {
-            case 32: // space
-              $element.change();
-            case 13: // enter
-              e.preventDefault();
+          case 32: // space
+            $element.change();
+          /* falls through */
+          case 13: // enter
+            e.preventDefault();
             break;
           }
         })
@@ -216,7 +219,7 @@
           $element.find('input[type="checkbox"]').styleform('checkbox');
 
           $element.find('input[type="radio"]').styleform('radio');
-          
+
           $element.find('select').styleform('select');
         });
       },
@@ -258,7 +261,7 @@
           // unlike the checkbox the change function is abit more tricky
           styleCheckers('radio', $element, function ($template, $element) {
             var $radioGroup;
-            
+
             // First get all the other radio buttons which are in the same group
             if ($element.attr('name')) {
               $radioGroup = $('input[name="' + $element.attr('name') + '"]:radio');
@@ -282,26 +285,6 @@
               }
             });
           });
-        });
-      },
-      
-      /**
-       * enable styling of a select element.
-       */
-      select : function () {
-        return this.each(function (index, element) {
-          var $element = $(element);
-          
-          // Skip the select if the user told us to.
-          if ($element.hasClass(settingsClasses.skip)) {
-            return;
-          }
-          
-          
-          // var $template = $('<div class="select-container"><div class="toggler">Title</div><div class="box">stuff in here</div></div>');
-          
-          
-          // $template.insertBefore($element);
         });
       },
 
